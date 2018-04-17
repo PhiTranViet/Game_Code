@@ -2,9 +2,10 @@
 #include <string>
 #include <Windows.h>
 #include <ctime>
+#include <conio.h>
 using namespace std;
 
-char map[50][50]; 
+char map[60][60]; 
 void resizeConsole(int width, int height)
 {
 	HWND console = GetConsoleWindow();
@@ -78,7 +79,7 @@ void InDuongDua()
 {
 	for(int i = 0; i < 30; i++)
 	{
-		cout << "\t";
+		cout << "\t\t\t\t";
 		for(int j = 0; j < 30; j++)
 		{
 			if(j == 0 || j == 29)
@@ -158,7 +159,12 @@ void DiChuyenXe(int &x, int &y)
 		{
 			if(map[x][y] == '!' || map[x][y - 1] == '!' || map[x][y + 1] == '!' || map[x - 1][y - 1] == '!' || map[x + 1][y - 1] == '!' || map[x - 1][y + 1] == '!' || map[x + 1][y + 1] == '!')
 			{
-				exit(0);
+				cout<<"\a";
+				gotoxy(30,32);
+				textcolor(12);
+				cout<<"Game Over !!!, Thank You For Playing "<<endl;	
+				Sleep(5000);
+				exit(0);			
 			}
 
 			map[x][y] = ' '; 
@@ -180,6 +186,11 @@ void DiChuyenXe(int &x, int &y)
 		{
 			if(map[x][y] == '!' || map[x][y - 1] == '!' || map[x][y + 1] == '!' || map[x - 1][y - 1] == '!' || map[x + 1][y - 1] == '!' || map[x - 1][y + 1] == '!' || map[x + 1][y + 1] == '!')
 			{
+				cout<<"\a";
+				gotoxy(30,32);
+				textcolor(12);
+				cout<<"Game Over !!!, Thank You For Playing "<<endl;	
+				Sleep(5000);
 				exit(0); 
 			}
 			map[x][y] = ' ';
@@ -199,6 +210,11 @@ void DiChuyenXe(int &x, int &y)
 		{
 			if(map[x][y] == '!' || map[x][y - 1] == '!' || map[x][y + 1] == '!' || map[x - 1][y - 1] == '!' || map[x + 1][y - 1] == '!' || map[x - 1][y + 1] == '!' || map[x + 1][y + 1] == '!')
 			{
+				cout<<"\a";
+				gotoxy(30,32);
+				textcolor(12);
+				cout<<"Game Over !!!, Thank You For Playing "<<endl;	
+				Sleep(5000);
 				exit(0);
 			}
 			map[x][y] = ' '; 
@@ -217,7 +233,12 @@ void DiChuyenXe(int &x, int &y)
 		if(x <= 27)
 		{
 			if(map[x][y] == '!' || map[x][y - 1] == '!' || map[x][y + 1] == '!' || map[x - 1][y - 1] == '!' || map[x + 1][y - 1] == '!' || map[x - 1][y + 1] == '!' || map[x + 1][y + 1] == '!')
-			{				
+			{	
+				cout<<"\a";
+				gotoxy(30,32);
+				textcolor(12);
+				cout<<"Game Over !!!, Thank You For Playing "<<endl;	
+				Sleep(5000);		
 				exit(0); 
 			}
 			map[x][y] = ' '; 
@@ -238,7 +259,10 @@ int main()
 	int x = 20, y = 15; 
 	int x1 = 2, y1;
 	int x2 = 5, y2 = 10; 
+	int x3 = 6, y3 = 7;
 	int a = 0;
+	int diem=0;
+	int n=1,k=5;
 	while(true)
 	{
 		a++;
@@ -252,27 +276,40 @@ int main()
 		}
 		srand(time(0)); 
 		y1 = 2 + rand() % 26;
-
 		VeXePlayer(x, y);
 		VeXeChuongNgaiVat(x1, y1); 
 		VeXeChuongNgaiVat(x2, y2); 
+		VeXeChuongNgaiVat(x3, y3); 
 		XoaManHinh();	
 		InDuongDua();
 		DiChuyenXe(x, y);
-		Sleep(0);
 		if(a >= 30)
 		{
 			a = 0;
 		}
 		if(map[x][y] == '!' || map[x][y - 1] == '!' || map[x][y + 1] == '!' || map[x - 1][y - 1] == '!' || map[x + 1][y - 1] == '!' || map[x - 1][y + 1] == '!' || map[x + 1][y + 1] == '!')
 		{
+			cout<<"\a";
+			gotoxy(30,32);
+			textcolor(12);
+			cout<<"Game Over !!!, Thank You For Playing "<<endl;	
+			Sleep(5000);
 			return 0; 
 		}
+		
 		XoaXeChuongNgai(x1, y1);
 		x1++;
 		if(x1 == 31)
 		{
 			x1 = 2;
+			diem++;
+			if(diem%8==0)
+			{
+				n++;
+			}
+			gotoxy(85,29);
+			textcolor(11);
+			cout<<" DIEM : "<<diem;
 		}
 		XoaXeChuongNgai(x2, y2);
 		x2++;
@@ -280,9 +317,52 @@ int main()
 		{
 			x2 = 5;
 			y2 = 2 + rand() % 26;
+			diem++;
+			gotoxy(85,29);
+			textcolor(11);
+			cout<<" DIEM : "<<diem;
+			if(diem%8==0)
+			{
+				n++;
+			}
+			gotoxy(85,30);
+			textcolor(13);
+			cout<<" LEVER : "<<n;
+		}
+		XoaXeChuongNgai(x3, y3);
+		x3++;
+		if(x3 == 31)
+		{
+			x3 = 6;
+			y3 = 3 + rand() % 25;
+			diem++;
+			gotoxy(85,29);
+			textcolor(11);
+			cout<<" DIEM : "<<diem;
+			if(diem%8==0)
+			{
+				n++;
+			}
+			gotoxy(85,30);
+			textcolor(13);
+			cout<<" LEVER : "<<n;
+		}
+		gotoxy(85,28);
+		textcolor(13);
+		cout<<" SLEEP "<<10-n;
+		Sleep(10-n);
+		if(n==10)
+		{
+			cout<<"\a";
+			gotoxy(30,32);
+			textcolor(14);
+			cout<<"Game Over Congratulations!!! You Won The Cup"<<endl;	
+			Sleep(5000);
+			return 0;
 		}
 	}
 	system("pause");
+	getch();
 	return 0;
 
 }
